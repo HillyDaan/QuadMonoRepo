@@ -12,7 +12,7 @@ public class TriviaService: ITriviaService {
   }
 
   public async Task<ValidateAnswerReponseDTO> ValidateTriviaQuestions(ValidateAnswerRequestDTO dto) {
-    TriviaSession session = await _triviaStorageService.GetTriviaSession(dto.sessionId);
+    TriviaSession? session = await _triviaStorageService.GetTriviaSession(dto.sessionId);
     if (session == null)
         throw new Exception("Trivia session not found");
 
