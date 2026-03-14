@@ -21,7 +21,8 @@ public class TriviaService: ITriviaService {
     var results = session.Questions
         .Select(q => new AnswerResponseDTO(
             q.Id,
-            answerMap.TryGetValue(q.Id, out var selectedAnswer) && selectedAnswer == q.CorrectAnswer
+            answerMap.TryGetValue(q.Id, out var selectedAnswer) && selectedAnswer == q.CorrectAnswer,
+            q.CorrectAnswer
         ))
         .ToList();
 

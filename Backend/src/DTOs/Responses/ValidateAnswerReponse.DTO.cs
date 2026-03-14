@@ -5,5 +5,6 @@ public record ValidateAnswerReponseDTO(
 
 public record AnswerResponseDTO(
   string id,
-  bool correct
+  bool correct,
+  string correctAnswer
 );
