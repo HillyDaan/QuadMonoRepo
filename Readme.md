@@ -28,6 +28,8 @@
 
 - **API and State Management**: The frontend uses TanStack Query to fetch and cache trivia sessions, and mutations for submitting answers. This allows for automatic caching, invalidation, and a clean separation of concerns between UI and data fetching.  
 
+- **Minimal front-end design**: I decided not go overboard with front-end design. I had plans to make a fully customizable Trivia builder (Question amount, type, difficulty etc...) however I don't think that adds value to this demonstration. A very minimal front-end was supplied instead with just a basic interface for N questions. (Defined in appSettings in the backend)
+
 - **Component Design**: 
   - `TriviaBox` handles displaying questions and collecting user answers.  
   - `TriviaQuestion` handles displaying a single Question, highlitable buttons per option
