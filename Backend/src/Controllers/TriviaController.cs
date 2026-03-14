@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("questions")]
+[Route("")]
 public class TriviaController: ControllerBase 
 {
   private readonly ITriviaService _triviaService;
@@ -10,12 +10,12 @@ public class TriviaController: ControllerBase
     _triviaService = triviaService;
   }
 
-  [HttpPost]
+  [HttpPost("checkanswers")]
   public async Task<ActionResult<ValidateAnswerReponseDTO>> CheckAnswers([FromBody] ValidateAnswerRequestDTO dto) {
     return Ok(await _triviaService.ValidateTriviaQuestions(dto));
   }
 
-  [HttpGet]
+  [HttpGet("questions")]
   public async Task<ActionResult<TriviaResponseDTO>> GetTriviaQuestions() {
     try
     {
