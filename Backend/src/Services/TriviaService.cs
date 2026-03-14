@@ -1,9 +1,14 @@
 public class TriviaService: ITriviaService {
 
   private readonly ITriviaApiService _triviaApiService;
+  private readonly ITriviaStorageService _triviaStorageService;
 
-  public TriviaService(ITriviaApiService triviaApiService){
+  public TriviaService(
+    ITriviaApiService triviaApiService,
+    ITriviaStorageService triviaStorageService
+  ){
     _triviaApiService = triviaApiService;
+    _triviaStorageService = triviaStorageService;
   }
 
   public async Task<TriviaResponseDTO> GetTriviaQuestions(){
@@ -20,7 +25,13 @@ public class TriviaService: ITriviaService {
       })
       .ToList();
 
-    //Store these ^
+   
+    await _triviaStorageService.StoreTriviaSession(new TriviaSession
+    {
+      SessionId = sessionId,
+      Questions = storageQuestions
+    });
+
     var dtoQuestions = apiResponse.results
         .Select((q, i) => new TriviaDTO(
             i.ToString(),
@@ -30,7 +41,6 @@ public class TriviaService: ITriviaService {
                 .ToArray()
         ))
         .ToList();
-    //Return these ^
     return new TriviaResponseDTO(sessionId, dtoQuestions);
   }
 

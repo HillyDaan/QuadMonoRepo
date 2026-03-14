@@ -7,7 +7,7 @@ public class TriviaApiService: ITriviaApiService {
 
   public async Task<OpenTriviaDTO> GetTriviaQuestionsOpenTrivia()
   {
-      const string url = "https://opentdb.com/api.php?amount=5";
+      const string url = "https://opentdb.com/api.php?amount=3";
 
       var response = await _httpClient.GetAsync(url);
       response.EnsureSuccessStatusCode();
