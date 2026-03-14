@@ -54,4 +54,34 @@ public class InMemoryServiceTests
         var deleted = await storageService.GetTriviaSession("test-session");
         Assert.Null(deleted);
     }
+
+    [Fact]
+    public async Task StoreTriviaSession_ExpiresAfterTimeout()
+    {
+        var memoryCache = new MemoryCache(new MemoryCacheOptions());
+        var provider = new InMemoryStorageProvider(memoryCache);
+        var storageService = new TriviaStorageService(provider);
+
+        var session = new TriviaSession
+        {
+            SessionId = "session-timeout",
+            Questions = new List<Question>
+            {
+                new Question { Id = "1", QuestionText = "Q1", CorrectAnswer = "A" }
+            }
+        };
+
+        await provider.SaveTriviaSession(session, 100);
+
+      
+        var retrieved = await storageService.GetTriviaSession("session-timeout");
+        Assert.NotNull(retrieved);
+
+  
+        await Task.Delay(150);
+        //Should now be gone?
+
+        var expired = await storageService.GetTriviaSession("session-timeout");
+        Assert.Null(expired);
+    }
 }

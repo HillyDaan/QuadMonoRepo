@@ -6,10 +6,12 @@ import type { TriviaAnswersRequestDTO } from '#/types/dto/requests/TriviaAnswers
 import type { TriviaAnswersResponseDTO } from '#/types/dto/responses/TriviaAnswersResponseDTO';
 import { useState } from 'react';
 import { TriviaResultsDialog } from '#/components/triviaResultsDialog';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const Route = createFileRoute('/')({ component: App })
 
 function App() {
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useTriviaSession();
   const validateMutation = useValidateTriviaAnswers();
@@ -50,13 +52,19 @@ function App() {
     })
   }
 
+  function onDialogClose() {
+    setOpen(false);
+    setResults(null);
+    queryClient.invalidateQueries({ queryKey: ['triviaSession'] });
+  }
+
   return (
     <main className="page-wrap px-4 pb-8 pt-14">
       <TriviaBox questions={data.questions} onSubmit={onSubmitAnswers}/>
       {results && (
         <TriviaResultsDialog
           open={open}
-          onOpenChange={setOpen}
+          onOpenChange={onDialogClose}
           results={results}
           questions={data.questions}
         />

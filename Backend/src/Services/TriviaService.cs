@@ -26,7 +26,8 @@ public class TriviaService: ITriviaService {
         ))
         .ToList();
 
-    //await _triviaStorageService.DeleteTriviaSession(dto.sessionId);
+    //Remove trivia session from storage
+    await _triviaStorageService.DeleteTriviaSession(dto.sessionId);
 
     return new ValidateAnswerReponseDTO(dto.sessionId, results);
   }
