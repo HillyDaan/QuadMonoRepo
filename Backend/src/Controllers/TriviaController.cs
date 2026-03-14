@@ -1,0 +1,32 @@
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+
+[ApiController]
+[Route("questions")]
+public class TriviaController: ControllerBase 
+{
+  private readonly ITriviaService _triviaService;
+
+  public TriviaController(ITriviaService triviaService){
+    _triviaService = triviaService;
+  }
+
+  [HttpGet]
+  public async Task<ActionResult<TriviaResponseDTO>> GetTriviaQuestions() {
+    try
+    {
+        var result = await _triviaService.GetTriviaQuestions();
+        return Ok(result);
+    }
+    catch (HttpRequestException)
+    {
+        return StatusCode(503, "Trivia API is currently unavailable.");
+    }
+    catch (InvalidOperationException)
+    {
+        return StatusCode(502, "Trivia API returned invalid data.");
+    }
+  }
+
+}
