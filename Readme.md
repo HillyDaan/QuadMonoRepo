@@ -1,17 +1,21 @@
 # Quad Solutions Assesment
 
 ## Building the application
-### Frontend
-- (Make sure you have > Node 20)
-- Navigate to Frontend folder
-- Install dependencies: npm i
-- Run dev server: npm run dev
-
-
 ### Backend
 - (Make sure you have .NET 10)
 - Navigate to Backend folder
 - dotnet run
+
+### Frontend
+- (Make sure you have > Node 20)
+- Navigate to Frontend folder
+- Install dependencies: npm i
+- Prepare ENV file:
+  - Make a .env file in the Frontend folder
+  - Add this line: VITE_TRIVIA_BACKEND_API=http://localhost:5136
+  - Change port to the port currently running your c# backend
+- Run dev server: npm run dev
+
 
 ### Backend tests
 - Navigate to Backend.Tests folder
@@ -26,9 +30,10 @@
 
 - **Component Design**: 
   - `TriviaBox` handles displaying questions and collecting user answers.  
+  - `TriviaQuestion` handles displaying a single Question, highlitable buttons per option
   - `TriviaResultsDialog` shows the results, including the number of correct answers and the correct answers for wrong ones. 
 
-- **Unit Tests**: Unit tests cover `TriviaService` and `TriviaStorageService` independently, using mocks to isolate dependencies, ensuring the logic works correctly without relying on external APIs.
+- **Unit Tests**: Unit tests cover `TriviaService` and `TriviaStorageService` independently, using mocks to isolate dependencies, ensuring the logic works correctly without relying on calling any external api's (The Trivia API)
 
 ## Tech Stack
 

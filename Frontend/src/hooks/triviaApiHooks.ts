@@ -4,7 +4,7 @@ import type { TriviaResponseDTO } from "#/types/dto/responses/TriviaResponseDTO"
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5136/questions";
+const BASE_URL = import.meta.env.VITE_TRIVIA_BACKEND_API + '/questions' as string;
 
 export function useTriviaSession() {
   return useQuery({

@@ -1,15 +1,15 @@
 public class TriviaApiService: ITriviaApiService {
   private readonly HttpClient _httpClient;
+  private readonly string _openTriviaUrl;
 
-  public TriviaApiService(HttpClient httpClient){
+  public TriviaApiService(HttpClient httpClient, IConfiguration configuration){
     _httpClient = httpClient;
+    _openTriviaUrl = configuration["TriviaApi:OpenTriviaUrl"]!;
   }
 
   public async Task<OpenTriviaDTO> GetTriviaQuestionsOpenTrivia()
   {
-      const string url = "https://opentdb.com/api.php?amount=3";
-
-      var response = await _httpClient.GetAsync(url);
+      var response = await _httpClient.GetAsync(_openTriviaUrl);
       response.EnsureSuccessStatusCode();
       var data = await response.Content.ReadFromJsonAsync<OpenTriviaDTO>();
 
