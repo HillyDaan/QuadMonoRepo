@@ -11,6 +11,25 @@ public class TriviaService: ITriviaService {
     _triviaStorageService = triviaStorageService;
   }
 
+  public async Task<ValidateAnswerReponseDTO> ValidateTriviaQuestions(ValidateAnswerRequestDTO dto) {
+    TriviaSession session = await _triviaStorageService.GetTriviaSession(dto.sessionId);
+    if (session == null)
+        throw new Exception("Trivia session not found");
+
+    var answerMap = dto.Answers.ToDictionary(a => a.id, a => a.answer);
+
+    var results = session.Questions
+        .Select(q => new AnswerResponseDTO(
+            q.Id,
+            answerMap.TryGetValue(q.Id, out var selectedAnswer) && selectedAnswer == q.CorrectAnswer
+        ))
+        .ToList();
+
+    //await _triviaStorageService.DeleteTriviaSession(dto.sessionId);
+
+    return new ValidateAnswerReponseDTO(dto.sessionId, results);
+  }
+
   public async Task<TriviaResponseDTO> GetTriviaQuestions(){
 
     var apiResponse = await _triviaApiService.GetTriviaQuestionsOpenTrivia();

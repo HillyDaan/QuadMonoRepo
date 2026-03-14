@@ -1,9 +1,9 @@
 public record ValidateAnswerReponseDTO(
   string sessionId,
-  List<AnswerDTO> Answers
+  List<AnswerResponseDTO> Answers
 );
 
-public record AnswerDTO(
+public record AnswerResponseDTO(
   string id,
   bool correct
 );

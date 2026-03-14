@@ -1,6 +1,4 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
 
 [ApiController]
 [Route("questions")]
@@ -10,6 +8,11 @@ public class TriviaController: ControllerBase
 
   public TriviaController(ITriviaService triviaService){
     _triviaService = triviaService;
+  }
+
+  [HttpPost]
+  public async Task<ActionResult<ValidateAnswerReponseDTO>> CheckAnswers([FromBody] ValidateAnswerRequestDTO dto) {
+    return Ok(await _triviaService.ValidateTriviaQuestions(dto));
   }
 
   [HttpGet]
