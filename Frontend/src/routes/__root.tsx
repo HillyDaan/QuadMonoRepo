@@ -1,11 +1,13 @@
+/// <reference types="vite/client" />
+import appCss from '../styles.css?url'
+
 import {
+  HeadContent,
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 
 import TanStackQueryProvider from '../integrations/tanstack-query/root-provider'
-
-import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
 
@@ -41,6 +43,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere]">
         <TanStackQueryProvider>
           {children}

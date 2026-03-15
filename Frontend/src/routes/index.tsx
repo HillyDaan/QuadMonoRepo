@@ -1,16 +1,16 @@
 import { TriviaBox } from '#/components/triviaBox';
 import { useTriviaSession, useValidateTriviaAnswers } from '#/hooks/triviaApiHooks'
 import { createFileRoute } from '@tanstack/react-router'
-import '../styles.css';
 import type { TriviaAnswersRequestDTO } from '#/types/dto/requests/TriviaAnswersRequestDTO';
 import type { TriviaAnswersResponseDTO } from '#/types/dto/responses/TriviaAnswersResponseDTO';
 import { useState } from 'react';
 import { TriviaResultsDialog } from '#/components/triviaResultsDialog';
 import { useQueryClient } from '@tanstack/react-query';
 
-export const Route = createFileRoute('/')({ ssr: false,
-  
-  component: App })
+export const Route = createFileRoute('/')({ 
+  ssr: false,
+  component: App }
+)
 
 function App() {
   const queryClient = useQueryClient();
