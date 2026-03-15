@@ -8,7 +8,9 @@ import { useState } from 'react';
 import { TriviaResultsDialog } from '#/components/triviaResultsDialog';
 import { useQueryClient } from '@tanstack/react-query';
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({ ssr: false,
+  
+  component: App })
 
 function App() {
   const queryClient = useQueryClient();

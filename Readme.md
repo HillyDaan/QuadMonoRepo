@@ -1,5 +1,10 @@
 # Quad Solutions Assesment
 
+# Visit the site live (Hosted on Railway)
+
+Frontend: https://quadmonorepo-frontend-production.up.railway.app/
+Backend api:  https://quadmonorepo-production.up.railway.app/
+
 ## Building the application
 ### Backend
 - (Make sure you have .NET 10)
@@ -20,6 +25,8 @@
 ### Backend tests
 - Navigate to Backend.Tests folder
 - dotnet test
+
+
 
 
 ## Design Decisions
